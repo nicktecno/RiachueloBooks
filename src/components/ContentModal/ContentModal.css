@@ -64,8 +64,43 @@
 
 .ContentModal__description::-webkit-scrollbar {
   display: none;
+  
+  font-family: 'Roboto'
 }
 
+.favoriteButton {
+  display: flex;
+  align-items: center;
+  background-color: green;
+  height: 40px;
+  justify-content: center; 
+  text-align: center;
+  font-family: 'Roboto';
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.favoriteButton:hover {
+  background-color:rgb(60, 175, 60) ;
+}
+
+.removeFavoriteButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background-color: rgb(148, 48, 48);
+  height: 40px;
+  justify-content: center; 
+  text-align: center;
+  font-family: 'Roboto';
+  font-weight: 700;
+  border-radius: 10px;
+
+}
+.removeFavoriteButton:hover {
+  background-color:rgb(196, 89, 89) ;
+}
 
 
 @media (min-width: 835px) {

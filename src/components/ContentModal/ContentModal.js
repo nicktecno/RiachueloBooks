@@ -143,7 +143,8 @@ export default function TransitionsModal({
 
                 <span className="ContentModal__description">{description}</span>
 
-                <button
+                <div
+                  className="favoriteButton"
                   onClick={() =>
                     addFavorites(
                       description,
@@ -157,10 +158,13 @@ export default function TransitionsModal({
                   }
                 >
                   Adicionar ao Favoritos
-                </button>
-                <button onClick={() => removeFavorites(id)}>
+                </div>
+                <div
+                  className="removeFavoriteButton"
+                  onClick={() => removeFavorites(id)}
+                >
                   Remover dos Favoritos
-                </button>
+                </div>
               </div>
             </div>
           </div>
