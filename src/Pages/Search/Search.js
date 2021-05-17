@@ -7,7 +7,9 @@ import {
   ThemeProvider,
 } from "@material-ui/core";
 
+import { img_300, unavailable } from "../../config/config";
 import "./Search.css";
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 
@@ -36,7 +38,7 @@ const Search = () => {
     const { data } = await axios.get(
       `https://www.googleapis.com/books/v1/volumes?q=${searchText}&maxResults=6&startIndex=${page}`
     );
-    console.log(data);
+    console.log(data.items);
     setContent(data.items);
     setNumOfPages(10);
   };
@@ -72,7 +74,9 @@ const Search = () => {
             <FileList
               key={contentFile.id}
               id={contentFile.id}
-              poster={contentFile.volumeInfo.imageLinks.thumbnail}
+              poster={
+                contentFile.volumeInfo?.imageLinks?.thumbnail || unavailable
+              }
               title={contentFile.volumeInfo.title}
               date={contentFile.volumeInfo.publishedDate}
               publisher={contentFile.volumeInfo.publisher}

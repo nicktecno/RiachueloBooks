@@ -24,10 +24,6 @@ const FileList = ({
       description={description}
       pages={pages}
     >
-      <Badge
-        badgeContent={vote_average}
-        color={vote_average > 6 ? "primary" : "secondary"}
-      />
       <Poster src={poster} alt={title} />
       <Title className="title">{title}</Title>
       <Subtitle className="subTitle">

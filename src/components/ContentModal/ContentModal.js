@@ -39,6 +39,8 @@ export default function TransitionsModal({
   poster,
   publisher,
   date,
+  pages,
+  id,
 }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
@@ -50,6 +52,28 @@ export default function TransitionsModal({
   const handleClose = () => {
     setOpen(false);
   };
+
+  async function addFavorites(
+    description,
+    title,
+    poster,
+    publisher,
+    date,
+    pages,
+    id
+  ) {
+    const CardId = id;
+    const dataCard = {
+      id: id,
+      title: title,
+      description: description,
+      poster: poster,
+      publisher: publisher,
+      date: date,
+      pages: pages,
+    };
+    localStorage.setItem(CardId, JSON.stringify(dataCard));
+  }
 
   return (
     <>
@@ -91,8 +115,25 @@ export default function TransitionsModal({
                   {title} ({(date || "-----").substring(0, 4)})
                 </span>
                 <i className="tagline">{publisher}</i>
+                <i className="tagline">Total of pages: {pages}</i>
 
                 <span className="ContentModal__description">{description}</span>
+
+                <button
+                  onClick={() =>
+                    addFavorites(
+                      description,
+                      title,
+                      poster,
+                      publisher,
+                      date,
+                      pages,
+                      id
+                    )
+                  }
+                >
+                  Adicionar ao Favoritos
+                </button>
               </div>
             </div>
           </div>
