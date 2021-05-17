@@ -13,6 +13,8 @@ import "./ContentModal.css";
 import { Button } from "@material-ui/core";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import { ContainerMedia } from "../FileList/FileListStyled";
+import { useHistory } from "react-router";
+import Favorites from "../../Pages/Favorites/Favorites";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -42,6 +44,7 @@ export default function TransitionsModal({
   pages,
   id,
 }) {
+  const history = useHistory();
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
@@ -90,8 +93,11 @@ export default function TransitionsModal({
 
   async function removeFavorites(id) {
     const favorites = JSON.parse(localStorage.getItem("favorites"));
-    const filtered = favorites.filter((favorite) => favorite.id === id);
-    console.log(filtered);
+
+    const filtered = favorites.filter((favorite) => favorite.id !== id);
+    await localStorage.setItem("favorites", JSON.stringify(filtered));
+    window.location.reload();
+    history.push("/favorites");
   }
 
   return (
@@ -153,7 +159,7 @@ export default function TransitionsModal({
                 >
                   Adicionar ao Favoritos
                 </button>
-                <button onClick={(id) => removeFavorites()}>
+                <button onClick={() => removeFavorites(id)}>
                   Remover dos Favoritos
                 </button>
               </div>

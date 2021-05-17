@@ -15,12 +15,17 @@ import FileList from "../../components/FileList/FileList";
 import CustomPagination from "../../components/Pagination/CustomPagination";
 import { ContainerGeneralPages } from "../GeneralStyledComponents/GeneralStyledPages";
 
-const Favorites = () => {
+const Favorites = (params) => {
   const [type, setType] = useState(0);
   const [page, setPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [content, setContent] = useState([]);
   const [numOfPages, setNumOfPages] = useState();
+  const [render, setRender] = useState(false);
+
+  useEffect(() => {
+    setRender(params);
+  }, [params]);
 
   const darkTheme = createMuiTheme({
     palette: {
