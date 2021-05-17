@@ -35,12 +35,16 @@ const Search = () => {
   });
 
   const fetchSearch = async () => {
-    const { data } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchText}&maxResults=6&startIndex=${page}`
-    );
-    console.log(data.items);
-    setContent(data.items);
-    setNumOfPages(10);
+    try {
+      const { data } = await axios.get(
+        `https://www.googleapis.com/books/v1/volumes?q=${searchText}&maxResults=6&startIndex=${page}`
+      );
+      console.log(data.items);
+      setContent(data.items);
+      setNumOfPages(10);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -78,7 +82,7 @@ const Search = () => {
                 contentFile.volumeInfo?.imageLinks?.thumbnail || unavailable
               }
               title={contentFile.volumeInfo.title}
-              date={contentFile.volumeInfo.publishedDate}
+              date={contentFile.volumeInfo.publishedDate || "No Date"}
               publisher={contentFile.volumeInfo.publisher}
               vote_average={contentFile.vote_average}
               pages={contentFile.volumeInfo.pageCount}
