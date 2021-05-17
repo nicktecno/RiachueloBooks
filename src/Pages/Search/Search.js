@@ -34,11 +34,11 @@ const Search = () => {
 
   const fetchSearch = async () => {
     const { data } = await axios.get(
-      `https://www.googleapis.com/books/v1/volumes?q=${searchText}&maxResults=6&startIndex=1`
+      `https://www.googleapis.com/books/v1/volumes?q=${searchText}&maxResults=6&startIndex=${page}`
     );
-    console.log(data.items);
+    console.log(data);
     setContent(data.items);
-    setNumOfPages(data.total_pages);
+    setNumOfPages(10);
   };
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const Search = () => {
           ))}
         {searchText && !content && <h2>No Books Found</h2>}
       </ContainerGeneralPages>
-      {numOfPages > 1 && (
+      {numOfPages >= 1 && (
         <CustomPagination setPage={setPage} numOfPages={numOfPages} />
       )}
     </div>
