@@ -66,6 +66,8 @@
   display: none;
 }
 
+
+
 @media (min-width: 835px) {
   .ContentModal__landscape {
     display: none;

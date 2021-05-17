@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import axios from "axios";
-import {
-  img_500,
-  unavailable,
-  unavailableLandscape,
-} from "../../config/config";
+
 import "./ContentModal.css";
-import { Button } from "@material-ui/core";
-import YouTubeIcon from "@material-ui/icons/YouTube";
+import "./button.css";
+
 import { ContainerMedia } from "../FileList/FileListStyled";
 import { useHistory } from "react-router";
-import Favorites from "../../Pages/Favorites/Favorites";
 
 const useStyles = makeStyles((theme) => ({
   modal: {
@@ -96,8 +90,8 @@ export default function TransitionsModal({
 
     const filtered = favorites.filter((favorite) => favorite.id !== id);
     await localStorage.setItem("favorites", JSON.stringify(filtered));
-    window.location.reload();
-    history.push("/favorites");
+
+    history.go("/favorites");
   }
 
   return (
@@ -130,6 +124,11 @@ export default function TransitionsModal({
                 alt={title}
                 className="ContentModal__portrait"
               />
+              <div onClick={handleClose} className="close-container">
+                <div className="leftright"></div>
+                <div className="rightleft"></div>
+                <label className="close">close</label>
+              </div>
               <img
                 src={poster}
                 alt={title}
