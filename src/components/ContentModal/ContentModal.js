@@ -62,7 +62,6 @@ export default function TransitionsModal({
     pages,
     id
   ) {
-    const CardId = id;
     const dataCard = {
       id: id,
       title: title,
@@ -72,7 +71,27 @@ export default function TransitionsModal({
       date: date,
       pages: pages,
     };
-    localStorage.setItem(CardId, JSON.stringify(dataCard));
+
+    if (localStorage.getItem("favorites") === null) {
+      // Adicionando um array com um objeto no localstorage
+      localStorage.setItem("favorites", JSON.stringify([dataCard]));
+    } else {
+      // Copiando o array existente no localstorage e adicionando o novo objeto ao final.
+      localStorage.setItem(
+        "favorites",
+        // O JSON.parse transforma a string em JSON novamente, o inverso do JSON.strigify
+        JSON.stringify([
+          ...JSON.parse(localStorage.getItem("favorites")),
+          dataCard,
+        ])
+      );
+    }
+  }
+
+  async function removeFavorites(id) {
+    const favorites = JSON.parse(localStorage.getItem("favorites"));
+    const filtered = favorites.filter((favorite) => favorite.id === id);
+    console.log(filtered);
   }
 
   return (
@@ -133,6 +152,9 @@ export default function TransitionsModal({
                   }
                 >
                   Adicionar ao Favoritos
+                </button>
+                <button onClick={(id) => removeFavorites()}>
+                  Remover dos Favoritos
                 </button>
               </div>
             </div>
