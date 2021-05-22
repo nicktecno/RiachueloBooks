@@ -1,13 +1,11 @@
 import {
   Button,
   createMuiTheme,
-  Tab,
-  Tabs,
   TextField,
   ThemeProvider,
 } from "@material-ui/core";
 
-import { img_300, unavailable } from "../../config/config";
+import { unavailable } from "../../config/config";
 import "./Search.css";
 
 import axios from "axios";
@@ -19,7 +17,6 @@ import CustomPagination from "../../components/Pagination/CustomPagination";
 import { ContainerGeneralPages } from "../GeneralStyledComponents/GeneralStyledPages";
 
 const Search = () => {
-  const [type, setType] = useState(0);
   const [page, setPage] = useState(1);
   const [searchText, setSearchText] = useState("");
   const [content, setContent] = useState([]);
@@ -50,7 +47,7 @@ const Search = () => {
   useEffect(() => {
     window.scroll(0, 0);
     fetchSearch();
-  }, [type, page]);
+  }, [page]);
 
   return (
     <div>
